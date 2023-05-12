@@ -59,7 +59,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 print(y_train[1000:1020])
 
 batch_size = 128
-epochs = 10
+epochs = 4
 input_shape = (img_rows,img_cols,img_channels)
 
 model = Sequential()
@@ -101,13 +101,15 @@ print(p[:5])
 p2 = get_numbers(p)
 print(p2)
 
-def plot_samples_with_predictions(x, y_true, y_pred, n=15):
+def plot_samples_with_predictions(x, y_true, y_pred, n=40):
+    filas = (n + 9) // 10 
     for i in range(n):
-        plt.subplot(1, n, i+1)
+        plt.subplot(filas, 10, i+1)
         plt.imshow(x[i])
         plt.xticks([])
         plt.yticks([])
-        plt.title(f'Q: {etiquetas[y_true[i]]}\nP: {etiquetas[y_pred[i]]}')
+        plt.title(f'Q: {[y_true[i]]}\nP: {[y_pred[i]]}')
+        print("Q: ", etiquetas[y_true[i]], "P: ", etiquetas[y_pred[i]])
 predicted_labels = np.argmax(p, axis=1)
 plot_samples_with_predictions(x_test, np.argmax(y_test, axis=1), predicted_labels)
 plt.show()
